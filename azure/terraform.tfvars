@@ -1,6 +1,0 @@
-resource_group_name = "multi-cloud-rg"
-location            = "East US"
-vnet_cidr           = "10.1.0.0/16"
-subnet_cidr         = "10.1.1.0/24"
-admin_username      = "azureuser"
-vm_size             = "Standard_B2ms"
