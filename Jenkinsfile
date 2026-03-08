@@ -1,4 +1,4 @@
-ipipeline {
+pipeline {
     agent any
     environment {
         AWS_HOST = '98.84.74.9'
