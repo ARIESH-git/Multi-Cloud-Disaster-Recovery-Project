@@ -20,7 +20,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'aws-ssh-key', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
                         scp -o StrictHostKeyChecking=no -i $SSH_KEY ansible/files/index-aws.html ubuntu@$AWS_HOST:/var/www/html/index.html
-                        ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@$AWS_HOST "sudo systemctl restart nginx"
+                        ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@$AWS_HOST "sudo cp /tmp/index.html /var/www/html/index.html && sudo systemctl restart nginx"
                     '''
                 }
             }
@@ -31,7 +31,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'azure-ssh-key', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
                         scp -o StrictHostKeyChecking=no -i $SSH_KEY ansible/files/index-azure.html azureuser@$AZURE_HOST:/var/www/html/index.html
-                        ssh -o StrictHostKeyChecking=no -i $SSH_KEY azureuser@$AZURE_HOST "sudo systemctl restart nginx"
+                        ssh -o StrictHostKeyChecking=no -i $SSH_KEY azureuser@$AZURE_HOST "sudo cp /tmp/index.html /var/www/html/index.html && sudo systemctl restart nginx"
                     '''
                 }
             }
