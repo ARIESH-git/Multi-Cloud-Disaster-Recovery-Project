@@ -1,0 +1,62 @@
+---
+- name: Install and configure Nginx on AWS
+  hosts: aws
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy index-aws.html to web root
+      copy:
+        src: files/index-aws.html
+        dest: /var/www/html/index.html
+        mode: '0644'
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+
+- name: Install and configure Nginx on Azure
+  hosts: azure
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy index-azure.html to web root
+      copy:
+        src: files/index-azure.html
+        dest: /var/www/html/index.html
+        mode: '0644'
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
