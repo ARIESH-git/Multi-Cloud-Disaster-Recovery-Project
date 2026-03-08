@@ -1,8 +1,8 @@
-pipeline {
+ipipeline {
     agent any
     environment {
         AWS_HOST = '98.84.74.9'
-        AZURE_HOST = '20.102.69.169'
+        AZURE_HOST = '20.102.80.106'
     }
     stages {
         stage('Checkout') {
