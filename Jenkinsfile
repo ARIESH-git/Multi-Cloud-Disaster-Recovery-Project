@@ -18,13 +18,13 @@ pipeline {
         stage('Deploy to AWS') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'aws-ssh-key', keyFileVariable: 'SSH_KEY')]) {
-                    sh '''
-                        scp -o StrictHostKeyChecking=no -i $SSH_KEY ansible/files/index-aws.html ubuntu@$AWS_HOST:/var/www/html/index.html
-                        ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@$AWS_HOST "sudo cp /tmp/index.html /var/www/html/index.html && sudo systemctl restart nginx"
-                    '''
-                }
-            }
+sh '''
+                scp -o StrictHostKeyChecking=no -i $SSH_KEY ansible/files/index-aws.html ubuntu@$AWS_HOST:/tmp/index.html
+                ssh -o StrictHostKeyChecking=no -i $SSH_KEY ubuntu@$AWS_HOST "sudo cp /tmp/index.html /var/www/html/index.html && sudo systemctl restart nginx"
+            '''
         }
+    }
+}
 
         stage('Deploy to Azure') {
             steps {
